@@ -1,0 +1,48 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Controle : MonoBehaviour
+{ 
+    public string AndarFrente;
+    public string AndarAtras;
+
+    public string RotacionarDireita;
+    public string RotacionarEsquerda;
+
+    public string Atacar;
+
+
+    void Update()
+    {
+        if (!GetComponent<Animation>().isPlaying)
+            GetComponent<Animation>().Play("parado");
+        if (Input.GetKey(AndarFrente))
+        {
+            transform.GetComponent<Rigidbody>().velocity = transform.forward * 10;
+            GetComponent<Animation>().Play("andar");
+        }
+        if (Input.GetKey(AndarAtras))
+        {
+            transform.GetComponent<Rigidbody>().velocity = -transform.forward * 10;
+            GetComponent<Animation>().Play("andartras");
+        }
+        if (Input.GetKey(RotacionarDireita))
+        {
+            transform.Rotate(0, 90 * Time.deltaTime, 0);
+        }
+        if (Input.GetKey(RotacionarEsquerda))
+        {
+            transform.Rotate(0, -90 * Time.deltaTime, 0);
+        }
+        if (Input.GetKey(Atacar))
+        {
+            GetComponent<Animation>().Play("socar");
+        }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            transform.GetComponent<Rigidbody>().velocity = transform.forward * 25;
+            GetComponent<Animation>().Play("correr");
+        }
+    }
+}
